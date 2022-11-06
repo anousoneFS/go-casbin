@@ -4,12 +4,15 @@ go 1.19
 
 require (
 	github.com/casbin/casbin v1.9.1
+	github.com/casbin/casbin/v2 v2.56.0
+	github.com/cychiuae/casbin-pg-adapter v0.0.6
 	github.com/labstack/echo/v4 v4.9.1
 )
 
 require (
 	github.com/Knetic/govaluate v3.0.1-0.20171022003610-9aa49832a739+incompatible // indirect
 	github.com/labstack/gommon v0.4.0 // indirect
+	github.com/lib/pq v1.2.0 // indirect
 	github.com/mattn/go-colorable v0.1.11 // indirect
 	github.com/mattn/go-isatty v0.0.14 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect

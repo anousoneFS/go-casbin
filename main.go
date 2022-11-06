@@ -13,10 +13,10 @@ func main() {
 	// e.Use(enforcer.Enforce)
 	e.GET("/foo", func(c echo.Context) error {
 		return c.JSON(http.StatusOK, echo.Map{"message": "foo"})
-	}, enforcer.Enforce)
+	}, enforcer.Auth)
 	e.POST("/bar", func(c echo.Context) error {
 		return c.JSON(http.StatusOK, echo.Map{"message": "bar"})
-	}, enforcer.Enforce)
+	}, enforcer.Auth)
 	e.GET("/sai", func(c echo.Context) error {
 		return c.JSON(http.StatusOK, echo.Map{"message": "sai"})
 	})
@@ -27,13 +27,13 @@ type Enforcer struct {
 	enforcer *casbin.Enforcer
 }
 
-func (e *Enforcer) Enforce(next echo.HandlerFunc) echo.HandlerFunc {
+func (e *Enforcer) Auth(next echo.HandlerFunc) echo.HandlerFunc {
 	return func(c echo.Context) error {
 		user, _, _ := c.Request().BasicAuth()
-		method := c.Request().Method
+		// method := c.Request().Method
 		path := c.Request().URL.Path
 
-		result := e.enforcer.Enforce(user, path, method)
+		result := e.enforcer.Enforce(user, path, "*")
 
 		if result {
 			return next(c)
